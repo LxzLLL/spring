@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import com.witx.beans.FirstBean;
+import com.witx.beans.ITestInterface;
 
 @WebServlet(name="FirstServlet",urlPatterns="/FirstServlet")
 public class FirstServlet extends HttpServlet {
@@ -20,6 +21,8 @@ public class FirstServlet extends HttpServlet {
 	//@Resource(name="firstBean")
 	@Autowired
 	private FirstBean firstBean;
+	@Autowired
+	private ITestInterface itest;
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -39,12 +42,14 @@ public class FirstServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//super.doGet(req, resp);
+		resp.setCharacterEncoding("UTF-8");
+		resp.setContentType("text/html;charset=utf-8");
 		
 		//ApplicationContext context = new ClassPathXmlApplicationContext("spring/springConfig.xml");
 		//firstBean = (FirstBean) context.getBean("firstBean");
 		
 		System.out.println(firstBean.toString());
-		
+		itest.add();
 		resp.getWriter().append(firstBean.toString());
 		
 		

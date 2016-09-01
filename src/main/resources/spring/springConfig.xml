@@ -8,6 +8,9 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
 	<context:annotation-config/>
-	<context:component-scan base-package="com.witx.beans"></context:component-scan>
+	<context:component-scan base-package="com.witx.beans">
+		<context:include-filter type="assignable" 
+			expression="com.witx.beans.ITestInterface"/>
+	</context:component-scan>
   
 </beans>
