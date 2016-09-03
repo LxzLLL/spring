@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -23,6 +24,8 @@ public class FirstServlet extends HttpServlet {
 	private FirstBean firstBean;
 	@Autowired
 	private ITestInterface itest;
+	
+	private static Logger logger = Logger.getLogger(FirstServlet.class);
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -50,6 +53,13 @@ public class FirstServlet extends HttpServlet {
 		
 		System.out.println(firstBean.toString());
 		itest.add();
+		
+		
+		//以下logger输出只能用一个，否则uuid重复
+		//logger.debug("this is debug message");
+		//logger.info("this is info message");
+		logger.error("this is error message");
+		
 		resp.getWriter().append(firstBean.toString());
 		
 		
