@@ -15,6 +15,7 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import com.witx.beans.FirstBean;
 import com.witx.beans.ITestInterface;
+import com.witx.service.DataBaseService;
 
 @WebServlet(name="FirstServlet",urlPatterns="/FirstServlet")
 public class FirstServlet extends HttpServlet {
@@ -24,6 +25,8 @@ public class FirstServlet extends HttpServlet {
 	private FirstBean firstBean;
 	@Autowired
 	private ITestInterface itest;
+	@Autowired
+	private DataBaseService dbs;
 	
 	private static Logger logger = Logger.getLogger(FirstServlet.class);
 	
@@ -59,6 +62,11 @@ public class FirstServlet extends HttpServlet {
 		//logger.debug("this is debug message");
 		//logger.info("this is info message");
 		logger.error("this is error message");
+		
+		
+		//数据库添加信息
+		//DataBaseService dbs = new DataBaseService();
+		dbs.addData();
 		
 		resp.getWriter().append(firstBean.toString());
 		
