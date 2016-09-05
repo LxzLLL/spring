@@ -11,16 +11,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class FirstService {
 	
-	private String _strInit;
-	
 	public FirstService(){
 		
 	}
-	
-	public FirstService(String str){
-		this._strInit = str;
-	}
-	
 	
 	public String printService(String content){
 		return "您输入的内容为："+content;
