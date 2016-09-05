@@ -1,10 +1,8 @@
 package com.witx.interceptor;
 
-import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -50,7 +48,7 @@ public class FirstInterceptor {
 	 * @param pjp
 	 * @throws Throwable
 	 */
-	@Around("anyMethod()")
+	/*@Around("anyMethod()")
 	public Object doBasicProfiling(ProceedingJoinPoint pjp) throws Throwable{
 		//Object result = pjp.proceed();    //必须执行此语句
 		Object result = null;
@@ -67,5 +65,5 @@ public class FirstInterceptor {
 			System.out.println("异常");
 		}
 		return result;
-	}
+	}*/
 }
