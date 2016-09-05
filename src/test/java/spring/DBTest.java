@@ -5,7 +5,10 @@ import static org.junit.Assert.fail;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 
 import org.junit.Test;
@@ -32,6 +35,7 @@ public class DBTest {
 		info.put("password", "123");
 		Connection connection = driver.connect(url, info);
 		System.out.println(connection);
+		connection.close();
 	}
 	
 	@Test
@@ -49,8 +53,30 @@ public class DBTest {
 		String password = "123";
 		
 		Connection connection = DriverManager.getConnection(url, user, password);
-		System.out.println(connection);
 		
+		/*//更新id为123的数据
+		String sql = "update T_Sys_Log set user_name= ? where id='123' ";
+		PreparedStatement pStatement = connection.prepareStatement(sql);
+		pStatement.setString(1, "小林");
+		int i = pStatement.executeUpdate();
+		System.out.println("更新条数："+i);*/
+		
+		
+		String sql = "select * from T_Sys_Log";
+		PreparedStatement pStatement = connection.prepareStatement(sql);
+		ResultSet resultSet = pStatement.executeQuery();
+		while(resultSet.next()){
+			System.out.println(resultSet.getString(1));
+			System.out.println(resultSet.getString(2));
+			System.out.println(resultSet.getString(3));
+			System.out.println(resultSet.getString(4));
+			System.out.println(resultSet.getString(5));
+			System.out.println("--------------------------------");
+		}
+		resultSet.close();
+		System.out.println(connection);
+		pStatement.close();
+		connection.close();
 	}
 
 }
