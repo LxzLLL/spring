@@ -1,4 +1,4 @@
-package com.witx.dao.dsinterface;
+package com.witx.dao;
 
 import java.sql.Connection;
 
