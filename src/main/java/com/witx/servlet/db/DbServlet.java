@@ -51,9 +51,10 @@ public class DbServlet extends HttpServlet {
 		Repository r = new Repository("mysql2");
 		TSysLog tLogBase = new TSysLog();
 		tLogBase.setUserName("%l");
-		HashMap<String, ConditionEnum> map = new HashMap<String,ConditionEnum>();
-		map.put(TSysLog.Columns.userName, ConditionEnum.LIKE);
-		long l= r.count(tLogBase, map);
+		tLogBase.setOrderBy(TSysLog.Columns.createTime+" asc");
+		HashMap<String, ConditionEnum> conditionMap = new HashMap<String,ConditionEnum>();
+		conditionMap.put(TSysLog.Columns.userName, ConditionEnum.LIKE);
+		long l= r.count(tLogBase, conditionMap);
 		System.out.println("-------------->条数："+l);
 		
 		resp.getWriter().append(String.valueOf(l));

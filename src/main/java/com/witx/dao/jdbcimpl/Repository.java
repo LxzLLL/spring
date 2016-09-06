@@ -1,20 +1,16 @@
 package com.witx.dao.jdbcimpl;
 
-import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
 
-import com.witx.core.annotation.Column;
 import com.witx.core.annotation.Table;
 import com.witx.core.util.db.ConditionEnum;
 import com.witx.core.util.db.WhereBuilder;
