@@ -22,21 +22,21 @@ public class WhereBuilder {
 		}
 		
 		StringBuilder sbBuilder = new StringBuilder();
-		switch (operationType) {
+		//避免出现null值而导致switch异常
+		ConditionEnum cEnum = ConditionEnum.EQ;
+		if(!(operationType==null)){
+			cEnum = operationType;
+		}
+		switch (cEnum) {
 		case GT:
 			strWhere = sbBuilder.append(" AND "+fieldName+" > ?").toString();
 			break;
 		case LT:
 			strWhere = sbBuilder.append(" AND "+fieldName+" < ?").toString();
 			break;
+		//like的情况下，需要给的值中包含%%
 		case LIKE:
-			strWhere = sbBuilder.append(" AND "+fieldName+" LIKE %?%").toString();
-			break;
-		case LIKE_LEFT:
-			strWhere = sbBuilder.append(" AND "+fieldName+" LIKE %?").toString();
-			break;
-		case LIKE_RIGHT:
-			strWhere = sbBuilder.append(" AND "+fieldName+" LIKE ?%").toString();
+			strWhere = sbBuilder.append(" AND "+fieldName+" LIKE ?").toString();
 			break;
 		//EQ或默认时为=操作
 		case EQ:

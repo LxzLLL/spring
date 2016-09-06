@@ -55,9 +55,9 @@ public class DbServlet extends HttpServlet {
 		
 		Repository r = new Repository("mysql2");
 		TSysLog tLogBase = new TSysLog();
-		tLogBase.setUserId("00000001");
+		tLogBase.setUserName("%l");
 		HashMap<String, ConditionEnum> map = new HashMap<String,ConditionEnum>();
-		map.put(TSysLog.Columns.userId, ConditionEnum.EQ);
+		map.put(TSysLog.Columns.userName, ConditionEnum.LIKE);
 		long l= r.count(tLogBase, map);
 		System.out.println("-------------->条数："+l);
 		
