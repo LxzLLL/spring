@@ -55,71 +55,27 @@ public class Repository implements IRepository {
 			}
 		};
 		
-		//String sql = "select * from T_Sys_Log ";
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append("SELECT COUNT(*) FROM ");
-		
-		//构造SQL
-		
-		//获取table的名称
+		// 获取table的名称
 		String tableName = entity.getClass().getAnnotation(Table.class).value();
-		stringBuilder.append(" "+tableName+" ");
-		stringBuilder.append(" WHERE 1=1 ");
-		//反射获取各个字段，如果值为null，则不构造在where中
-		List<Object> objects = new ArrayList<>();
-		Field[] fields = entity.getClass().getDeclaredFields();
-		
-		//获取字段上带有Column注解的字段列表
-		List<Field> fList = Arrays.asList(fields).stream().filter(field->{
-			boolean bln = false;
-			if(field.isAnnotationPresent(Column.class))
-			{
-				bln = true;
-			}
-			return bln;
-		}).collect(Collectors.toList());
-		//循环添加where的sql和参数列表
-		for(Field f : fList){
-			// 如果不为空，设置可见性，然后返回
-		    f.setAccessible( true );
-			Object objValue = null;
-			//这里try...catch最多丢个值，而不至于程序宕掉
-			try {
-				objValue = f.get(entity);
-			} catch (IllegalArgumentException | IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			if(objValue!=null){
-				String colName = f.getAnnotation(Column.class).value();  //注解上的列名
-				stringBuilder.append(WhereBuilder.getWhereString(colName, conditionMap.get(colName)));
-				objects.add(objValue);
-			}
-			
-		}
+		stringBuilder.append(" " + tableName + " ");
+		// 参数列表
+		List<Object> outParamList = new ArrayList<>();
+		// 构造Where SQL
+		String whereSql = WhereBuilder.getWhereSql(entity, conditionMap, outParamList);
+		stringBuilder.append(" " + whereSql + " ");
 		
 		String sql = stringBuilder.toString();
 		System.out.println("--------->sql:"+sql);
 		try {
-			count = runner.query(this._conn, sql, rsHandler,objects.toArray());
+			count = runner.query(this._conn, sql, rsHandler,outParamList.toArray());
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			this._iDao.relase(this._conn);
 		}
 		
-		/*try {
-			count = runner.query(this._conn, "select count(*) from T_Sys_Log",rsHandler);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			this._iDao.relase(this._conn);
-		}*/
-		
-		// TODO Auto-generated method stub
 		return count;
 	}
 
