@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import com.witx.dao.IDataSoruce;
+import com.witx.core.util.db.ConditionEnum;
 
 /**
  * @author Minepop
@@ -22,10 +22,10 @@ public interface IRepository {
 	/**
 	 * 查询数据个数
 	 * @param entity
-	 * @param conditionMap 条件map
+	 * @param conditionMap 条件map，key为字段名，value为操作符
 	 * @return
 	 */
-	public <T> long count(T entity,Map<String, String> conditionMap);
+	public <T> long count(T entity,Map<String, ConditionEnum> conditionMap);
 	
 	/**
 	 * 增加数据

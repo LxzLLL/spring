@@ -7,7 +7,7 @@ public class StringHelper {
 	 * @param str 字符串
 	 * @return
 	 */
-	public static boolean isNoneOrEmpty(String str){
+	public static boolean isNullOrEmpty(String str){
 		//默认不为null或""
 		boolean bln = false;
 		if(str ==null || "".equals(str)){

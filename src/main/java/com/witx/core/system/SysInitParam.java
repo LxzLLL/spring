@@ -13,4 +13,9 @@ public class SysInitParam {
 	 * 数据库链接对象
 	 */
 	public static Map<String, IDataSoruce> dataSourceMap;
+	
+	/**
+	 * 默认数据库名称
+	 */
+	public static final String defaultDataBaseName = "mysql1";
 }

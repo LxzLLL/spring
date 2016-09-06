@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.ResultSetHandler;
 import org.junit.Test;
 
 import com.witx.beans.FirstBean;
@@ -88,4 +90,23 @@ public class DBTest {
 		FirstBean fb = new FirstBean();
 		System.out.println(fb.toString());
 	}
+	
+	@Test
+	public void dbutils() throws Exception{ 
+		Class.forName("com.mysql.jdbc.Driver");
+		
+		String url = "jdbc:mysql://192.168.100.141:3306/Evolution?characterEncoding=utf8&useSSL=true";
+		String user = "root";
+		String password = "123";
+		
+		Connection connection = DriverManager.getConnection(url, user, password);
+		
+		//ResultSetHandler<Object[]> handler = 
+		QueryRunner runner = new QueryRunner();
+		/*try{
+			//Object[] result = runner.update(conn, sql, params)
+		}*/
+		
+	}
+	
 }
