@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.witx.core.util.db.ConditionEnum;
+import com.witx.core.util.db.OrderEnum;
+import com.witx.entity.EntityBase;
 
 /**
  * @author Minepop
@@ -25,44 +27,44 @@ public interface IRepository {
 	 * @param conditionMap 条件map，key为字段名，value为操作符
 	 * @return
 	 */
-	public <T> long count(T entity,Map<String, ConditionEnum> conditionMap);
+	public <T extends EntityBase> long count(T entity,Map<String, ConditionEnum> conditionMap);
 	
 	/**
 	 * 增加数据
 	 * @param t
 	 */
-	public <T> void add(T entity);
+	public <T extends EntityBase> void add(T entity);
 	
 	/**
 	 * 批量增加数据
 	 * @param entities
 	 */
-	public <T> void add(Collection<T> entities);
+	public <T extends EntityBase> void add(Collection<T> entities);
 	
 	/**
 	 * 更新数据
 	 * @param t
 	 */
-	public <T> void update(T entity);
+	public <T extends EntityBase> void update(T entity);
 	
 	/**
 	 * 批量更新数据
 	 * @param entities
 	 */
-	public <T> void update(Collection<T> entities);
+	public <T extends EntityBase> void update(Collection<T> entities);
 	
 	/**
 	 * 删除数据
 	 * @param t
 	 */
-	public <T> void delete(T entity);
+	public <T extends EntityBase> void delete(T entity);
 	
 	/**
 	 * 查找所有数据
 	 * @param clazz
 	 * @return
 	 */
-	public <T> List<T> findAll(Class<T> clazz);
+	public <T extends EntityBase> List<T> findAll(Class<T> clazz);
 	
 	/**
 	 * 根据ID获取所有数据
@@ -70,6 +72,6 @@ public interface IRepository {
 	 * @param clazz
 	 * @return
 	 */
-	public <T> List<T> findById(String ID, Class<T> clazz);
+	public <T extends EntityBase> List<T> findById(String ID, Class<T> clazz);
 	
 }

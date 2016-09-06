@@ -1,16 +1,12 @@
 package com.witx.core.util.db;
 
 import java.lang.reflect.Field;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.witx.core.annotation.Column;
-import com.witx.core.annotation.Table;
 
 /**
  * @author Minepop db的where条件帮助类
@@ -41,19 +37,19 @@ public class WhereBuilder {
 		}
 		switch (cEnum) {
 		case GT:
-			strWhere = sbBuilder.append(" AND " + fieldName + " > ?").toString();
+			strWhere = sbBuilder.append(" AND " + fieldName + " > ? ").toString();
 			break;
 		case LT:
-			strWhere = sbBuilder.append(" AND " + fieldName + " < ?").toString();
+			strWhere = sbBuilder.append(" AND " + fieldName + " < ? ").toString();
 			break;
 		// like的情况下，需要给的值中包含%%
 		case LIKE:
-			strWhere = sbBuilder.append(" AND " + fieldName + " LIKE ?").toString();
+			strWhere = sbBuilder.append(" AND " + fieldName + " LIKE ? ").toString();
 			break;
 		// EQ或默认时为=操作
 		case EQ:
 		default:
-			strWhere = sbBuilder.append(" AND " + fieldName + " = ?").toString();
+			strWhere = sbBuilder.append(" AND " + fieldName + " = ? ").toString();
 			break;
 		}
 		return strWhere;

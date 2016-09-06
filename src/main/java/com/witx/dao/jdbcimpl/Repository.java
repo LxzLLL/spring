@@ -3,6 +3,7 @@ package com.witx.dao.jdbcimpl;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -13,8 +14,11 @@ import org.apache.commons.dbutils.ResultSetHandler;
 
 import com.witx.core.annotation.Table;
 import com.witx.core.util.db.ConditionEnum;
+import com.witx.core.util.db.OrderEnum;
+import com.witx.core.util.db.SqlBuilder;
 import com.witx.core.util.db.WhereBuilder;
 import com.witx.dao.IDao;
+import com.witx.entity.EntityBase;
 import com.witx.repository.IRepository;
 
 /**
@@ -35,7 +39,7 @@ public class Repository implements IRepository {
 	}
 
 	@Override
-	public <T> long count(T entity, Map<String, ConditionEnum> conditionMap) {
+	public <T extends EntityBase> long count(T entity, Map<String, ConditionEnum> conditionMap) {
 		
 		QueryRunner runner = new QueryRunner();
 		Long count = (long) 0;
@@ -51,18 +55,25 @@ public class Repository implements IRepository {
 			}
 		};
 		
-		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append("SELECT COUNT(*) FROM ");
+		/*StringBuilder stringBuilder = new StringBuilder();
 		// 获取table的名称
 		String tableName = entity.getClass().getAnnotation(Table.class).value();
-		stringBuilder.append(" " + tableName + " ");
+		stringBuilder.append(MessageFormat.format("SELECT COUNT(*) FROM {0} ", tableName));
 		// 参数列表
 		List<Object> outParamList = new ArrayList<>();
 		// 构造Where SQL
 		String whereSql = WhereBuilder.getWhereSql(entity, conditionMap, outParamList);
-		stringBuilder.append(" " + whereSql + " ");
+		stringBuilder.append(whereSql);
 		
 		String sql = stringBuilder.toString();
+		System.out.println("--------->sql:"+sql);*/
+		
+		SqlBuilder<T> sqlBuilder = new SqlBuilder<T>(entity);
+		String sql = sqlBuilder.selectCount()
+							.where(conditionMap)
+							.getSbSql()
+							.toString();
+		List<Object> outParamList = sqlBuilder.get_params();
 		System.out.println("--------->sql:"+sql);
 		try {
 			count = runner.query(this._conn, sql, rsHandler,outParamList.toArray());
@@ -76,43 +87,43 @@ public class Repository implements IRepository {
 	}
 
 	@Override
-	public <T> void add(T entity) {
+	public <T extends EntityBase> void add(T entity) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public <T> void add(Collection<T> entities) {
+	public <T extends EntityBase> void add(Collection<T> entities) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public <T> void update(T entity) {
+	public <T extends EntityBase> void update(T entity) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public <T> void update(Collection<T> entities) {
+	public <T extends EntityBase> void update(Collection<T> entities) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public <T> void delete(T entity) {
+	public <T extends EntityBase> void delete(T entity) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public <T> List<T> findAll(Class<T> clazz) {
+	public <T extends EntityBase> List<T> findAll(Class<T> clazz) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <T> List<T> findById(String ID, Class<T> clazz) {
+	public <T extends EntityBase> List<T> findById(String ID, Class<T> clazz) {
 		// TODO Auto-generated method stub
 		return null;
 	}

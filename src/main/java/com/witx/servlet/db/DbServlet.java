@@ -2,6 +2,7 @@ package com.witx.servlet.db;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.witx.core.util.db.ConditionEnum;
+import com.witx.core.util.db.OrderEnum;
 import com.witx.dao.jdbcimpl.Repository;
 import com.witx.entity.TSysLog;
 
@@ -51,9 +53,17 @@ public class DbServlet extends HttpServlet {
 		Repository r = new Repository("mysql2");
 		TSysLog tLogBase = new TSysLog();
 		tLogBase.setUserName("%l");
-		tLogBase.setOrderBy(TSysLog.Columns.createTime+" asc");
-		HashMap<String, ConditionEnum> conditionMap = new HashMap<String,ConditionEnum>();
+		
+		//orderby
+		Map<String, OrderEnum> sortMap = new HashMap<String,OrderEnum>();
+		sortMap.put(TSysLog.Columns.createTime,OrderEnum.ASC);
+		//tLogBase.setOrderBy(sortMap);
+		
+		//where
+		Map<String, ConditionEnum> conditionMap = new HashMap<String,ConditionEnum>();
 		conditionMap.put(TSysLog.Columns.userName, ConditionEnum.LIKE);
+		
+		
 		long l= r.count(tLogBase, conditionMap);
 		System.out.println("-------------->条数："+l);
 		
