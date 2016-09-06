@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import com.witx.dao.dsinterface.IDataSoruce;
+import com.witx.dao.IDataSoruce;
 
 /**
  * @author Arvin

@@ -5,6 +5,7 @@ import javax.servlet.ServletContextListener;
 
 import org.dom4j.DocumentException;
 
+import com.witx.core.system.SysInitParam;
 import com.witx.dao.DataSourceManager;
 
 public class DbListener implements ServletContextListener {
@@ -14,7 +15,7 @@ public class DbListener implements ServletContextListener {
 		System.out.println("--------->加载数据源");
 		//加载数据源
 		try {
-			DataSourceManager.dataSourceMap = DataSourceManager.setDataSourceMapByJdbcXml();
+			SysInitParam.dataSourceMap = DataSourceManager.setDataSourceMapByJdbcXml();
 			//DataSourceManager.setDataSourceMapByJdbcXml();			//不能在自身类中赋值
 		} catch (DocumentException e) {
 			// TODO Auto-generated catch block

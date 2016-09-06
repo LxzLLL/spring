@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.witx.dao.DataSourceManager;
+import com.witx.core.system.SysInitParam;
 
 @WebServlet(name="DbServlet",urlPatterns="/DbServlet")
 public class DbServlet extends HttpServlet {
@@ -26,7 +26,7 @@ public class DbServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		Connection connection = DataSourceManager.dataSourceMap.get("mysql2").getConnection();
+		Connection connection = SysInitParam.dataSourceMap.get("mysql2").getConnection();
 		System.out.println("------------------------>"+connection);
 		try {
 			String sql = "select * from T_Sys_Log";

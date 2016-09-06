@@ -10,7 +10,6 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
-import com.witx.dao.dsinterface.IDataSoruce;
 import com.witx.dao.jdbcimpl.JdbcDataManager;
 
 /**
@@ -22,9 +21,7 @@ public class DataSourceManager {
 	/**
 	 * 数据访问组件的map对象，在系统初始化时，通过xml配置加载；
 	 * 由于只在系统初始化时加载，不需考虑支持多线程和删减情况
-	 */
-	// TODO 需放入一个全局的静态类的变量中
-	public static Map<String, IDataSoruce> dataSourceMap;		
+	 */	
 	
 	/**
 	 * 根据jdbc的xml配置文件，加载连接到datasourceMap中，用name名称标识，上层应用通过此name获取对应数据库驱动

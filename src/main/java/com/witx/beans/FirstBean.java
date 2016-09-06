@@ -4,18 +4,22 @@ import org.springframework.stereotype.Component;
 
 @Component("firstBean")
 public class FirstBean {
-	private String name="小王";
-	private int age = 20;
+	/*private String name="小王";
+	private int age = 20;*/
+	
+	private String name;
+	private Integer age;
+	
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getAge() {
+	public Integer getAge() {
 		return age;
 	}
-	public void setAge(int age) {
+	public void setAge(Integer age) {
 		this.age = age;
 	}
 	

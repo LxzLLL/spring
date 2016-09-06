@@ -8,10 +8,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Properties;
 
 import org.junit.Test;
+
+import com.witx.beans.FirstBean;
 
 public class DBTest {
 
@@ -29,13 +30,16 @@ public class DBTest {
 		
 		Driver driver = new com.mysql.jdbc.Driver();
 		
-		String url = "jdbc:mysql://192.168.100.141:3306/Evolution?characterEncoding=utf8&useSSL=true";
+		String url = "jdbc:mysql://192.168.50.108:3306/Evolution?characterEncoding=utf8&useSSL=true";
 		Properties info = new Properties();
 		info.put("user", "root");
 		info.put("password", "123");
 		Connection connection = driver.connect(url, info);
+		Connection connection1 = driver.connect(url, info);
 		System.out.println(connection);
+		System.out.println(connection1);
 		connection.close();
+		connection1.close();
 	}
 	
 	@Test
@@ -79,4 +83,9 @@ public class DBTest {
 		connection.close();
 	}
 
+	@Test
+	public void test3(){
+		FirstBean fb = new FirstBean();
+		System.out.println(fb.toString());
+	}
 }
