@@ -10,6 +10,7 @@ import com.witx.dao.IDataSoruce;
 /**
  * @author Minepop
  * IDAO的实现类
+ * TODO 增加基于DBUtils的基础操作类，上层调用只需传入sql、参数和返回值即可
  */
 public class JdbcDao implements IDao {
 
