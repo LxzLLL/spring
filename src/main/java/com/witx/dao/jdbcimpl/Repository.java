@@ -45,6 +45,7 @@ public class Repository implements IRepository {
 				Long count=(long) 0;
 				if(rs.next()){
 					count=rs.getLong(1);
+					
 				}
 				return count;
 			}
