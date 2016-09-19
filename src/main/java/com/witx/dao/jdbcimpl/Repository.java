@@ -67,8 +67,7 @@ public class Repository implements IRepository {
 		SqlBuilder<T> sqlBuilder = new SqlBuilder<T>(entity);
 		String sql = sqlBuilder.selectCount()
 							.where(conditionMap)
-							.getSbSql()
-							.toString();
+							.getSql();
 		List<Object> outParamList = sqlBuilder.get_params();
 		System.out.println("--------->sql:"+sql);
 		try {

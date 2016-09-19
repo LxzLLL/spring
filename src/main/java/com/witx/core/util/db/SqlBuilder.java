@@ -32,8 +32,8 @@ public class SqlBuilder<T extends EntityBase> {
 	 * 返回DBUtils使用的SQL语句
 	 * @return
 	 */
-	public StringBuilder getSbSql() {
-		return _sbSql;
+	public String getSql() {
+		return _sbSql.toString();
 	}
 
 
